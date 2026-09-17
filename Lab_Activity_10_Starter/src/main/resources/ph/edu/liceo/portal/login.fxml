@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ph.edu.liceo.portal.controller.LoginController"
+      alignment="CENTER" spacing="12" styleClass="login-root">
+
+    <padding><Insets top="30" right="34" bottom="30" left="34"/></padding>
+
+    <Label text="LICEO DE CAGAYAN UNIVERSITY" styleClass="brand"/>
+    <Label text="Student Portal" styleClass="title"/>
+
+    <Separator/>
+
+    <Label text="Student Number" styleClass="field-label"/>
+    <TextField fx:id="studentNoField" promptText="2026-00123"/>
+
+    <Label text="Password" styleClass="field-label"/>
+    <PasswordField fx:id="passwordField" promptText="Enter your password"/>
+
+    <Button text="LOG IN" maxWidth="Infinity"
+            styleClass="primary"
+            onAction="#handleLogin"/>
+
+    <Label fx:id="messageLabel" styleClass="message" wrapText="true"/>
+</VBox>

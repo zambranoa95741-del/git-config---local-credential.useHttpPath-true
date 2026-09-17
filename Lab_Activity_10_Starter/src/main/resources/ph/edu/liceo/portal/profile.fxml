@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ph.edu.liceo.portal.controller.ProfileController"
+            styleClass="profile-root">
+
+    <top>
+        <VBox alignment="CENTER" spacing="8" styleClass="header">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <Label text="STUDENT PROFILE" styleClass="header-text"/>
+            <Label fx:id="initialsLabel" text="--" styleClass="avatar"/>
+            <Label fx:id="nameLabel" text="Student Name" styleClass="header-name"/>
+        </VBox>
+    </top>
+
+    <center>
+        <GridPane hgap="14" vgap="14" styleClass="details">
+            <padding><Insets top="24" right="26" bottom="10" left="26"/></padding>
+
+            <Label text="Student No.:" styleClass="field-label"
+                   GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label fx:id="studentNoLabel" text="-" styleClass="value"
+                   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Course:" styleClass="field-label"
+                   GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <Label fx:id="courseLabel" text="-" styleClass="value" wrapText="true"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Email:" styleClass="field-label"
+                   GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <Label fx:id="emailLabel" text="-" styleClass="value"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <VBox alignment="CENTER">
+            <padding><Insets top="10" right="26" bottom="24" left="26"/></padding>
+            <Button text="LOG OUT" onAction="#handleLogout" maxWidth="Infinity" styleClass="primary"/>
+        </VBox>
+    </bottom>
+</BorderPane>
