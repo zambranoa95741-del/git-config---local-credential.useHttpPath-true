@@ -1,135 +1,92 @@
+package semifinal;
+
 import java.util.Scanner;
 
 public class Main {
-    private static Scanner input = new Scanner(System.in);
-    private static UserManager manager = new UserManager();
-    private static int nextId = 1;
-
     public static void main(String[] args) {
-        seedSampleUsers();
+        Scanner in = new Scanner(System.in);
+        RideManager manager = new RideManager();
 
-        boolean running = true;
+        manager.addRide(new Jeepney("Ana Reyes", 6.5));
+        manager.addRide(new Tricycle("Jerome Tan", 3.0));
+        manager.addRide(new Taxi("Liza Cruz", 5.0));
 
-        while (running) {
-            showMenu();
-
-            String choice = input.nextLine().trim();
-
-            if (choice.equals("1")) {
-                addUser();
-            } else if (choice.equals("2")) {
-                manager.listAll();
-            } else if (choice.equals("3")) {
-                searchUser();
-            } else if (choice.equals("4")) {
-                deleteUser();
-            } else if (choice.equals("5")) {
-                manager.exportAll();
-            } else if (choice.equals("6")) {
-                System.out.println("Goodbye!");
-                running = false;
-            } else {
-                System.out.println("Invalid choice. Please enter 1 to 6.");
-            }
-
+        int choice = -1;
+        while (choice != 0) {
             System.out.println();
-        }
-    }
+            System.out.println("========= LICEO RIDE =========");
+            System.out.println("1. Book a ride");
+            System.out.println("2. Show all tickets");
+            System.out.println("3. Find a passenger");
+            System.out.println("4. Show student discounts");
+            System.out.println("5. Show total sales");
+            System.out.println("0. Exit");
+            System.out.print("Choose: ");
+            choice = readInt(in);
 
-    private static void showMenu() {
-        System.out.println("===== USER MANAGEMENT SYSTEM =====");
-        System.out.println("1. Add user");
-        System.out.println("2. List all users");
-        System.out.println("3. Search user by ID");
-        System.out.println("4. Delete user by ID");
-        System.out.println("5. Export all users");
-        System.out.println("6. Exit");
-        System.out.print("Choose an option: ");
-    }
+            if (choice == 1) {
+                System.out.println("Vehicle: 1 = Jeepney, 2 = Tricycle, 3 = Taxi");
+                System.out.print("Choose vehicle: ");
+                int type = readInt(in);
+                System.out.print("Passenger name: ");
+                String name = in.nextLine().trim();
+                System.out.print("Distance in km: ");
+                double km = readDouble(in);
 
-    private static void addUser() {
-        System.out.println("Type of user: 1 = Admin 2 = Teacher 3 = Student");
-        System.out.print("Choose type: ");
-        String type = input.nextLine().trim();
+                Ride ride;
+                if (type == 1) {
+                    ride = new Jeepney(name, km);
+                } else if (type == 2) {
+                    ride = new Tricycle(name, km);
+                } else if (type == 3) {
+                    ride = new Taxi(name, km);
+                } else {
+                    System.out.println("Invalid vehicle.");
+                    continue;
+                }
 
-        System.out.print("Name: ");
-        String name = input.nextLine().trim();
-
-        System.out.print("Email: ");
-        String email = input.nextLine().trim();
-
-        User user;
-
-        if (type.equals("1")) {
-            user = new Admin(nextId, name, email);
-        } else if (type.equals("2")) {
-            System.out.print("Department: ");
-            String dept = input.nextLine().trim();
-
-            user = new Teacher(nextId, name, email, dept);
-        } else if (type.equals("3")) {
-            System.out.print("Course: ");
-            String course = input.nextLine().trim();
-
-            user = new Student(nextId, name, email, course);
-        } else {
-            System.out.println("Unknown type. User was not added.");
-            return;
-        }
-
-        manager.add(user);
-        nextId++;
-    }
-
-    private static void searchUser() {
-        System.out.print("Enter ID to search: ");
-
-        int id = readInt();
-
-        User found = manager.findById(id);
-
-        if (found == null) {
-            System.out.println("No user found with ID " + id + ".");
-        } else {
-            System.out.println("Found:");
-            found.display();
-        }
-    }
-
-    private static void deleteUser() {
-        System.out.print("Enter ID to delete: ");
-
-        int id = readInt();
-
-        if (manager.deleteById(id)) {
-            System.out.println("User " + id + " was deleted.");
-        } else {
-            System.out.println("No user found with ID " + id + ".");
-        }
-    }
-
-    private static int readInt() {
-        while (true) {
-            String line = input.nextLine().trim();
-
-            try {
-                return Integer.parseInt(line);
-            } catch (NumberFormatException e) {
-                System.out.print("That is not a number. Try again: ");
+                manager.addRide(ride);
+                ride.printTicket("Booked! Ingat sa biyahe.");
+            } else if (choice == 2) {
+                System.out.println("ALL TICKETS (" + manager.count() + ")");
+                manager.showAllTickets();
+            } else if (choice == 3) {
+                System.out.print("Passenger name: ");
+                String name = in.nextLine().trim();
+                Ride found = manager.findRide(name);
+                if (found == null) {
+                    System.out.println("No ride found for " + name + ".");
+                } else {
+                    found.printTicket();
+                }
+            } else if (choice == 4) {
+                System.out.println("STUDENT DISCOUNTS (20% off)");
+                manager.showStudentDiscounts();
+            } else if (choice == 5) {
+                System.out.printf("TOTAL SALES: PHP %.2f from %d rides%n",
+                        manager.totalSales(), manager.count());
+            } else if (choice == 0) {
+                System.out.println("Salamat! Goodbye.");
+            } else {
+                System.out.println("Invalid choice. Try again.");
             }
         }
     }
 
-    private static void seedSampleUsers() {
-        manager.add(new Admin(nextId, "Razz", "razz@liceo.edu.ph"));
-        nextId++;
+    private static int readInt(Scanner in) {
+        try {
+            return Integer.parseInt(in.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
 
-        manager.add(new Teacher(nextId, "Maria", "maria@liceo.edu.ph", "CIT"));
-        nextId++;
-
-        manager.add(new Student(nextId, "Ana", "ana@liceo.edu.ph", "BSIT"));
-        nextId++;
-
-        System.out.println();
+    private static double readDouble(Scanner in) {
+        try {
+            return Double.parseDouble(in.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Not a number - using 1.0 km.");
+            return 1.0;
+        }
     }
 }
