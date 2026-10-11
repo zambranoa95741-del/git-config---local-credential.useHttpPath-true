@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.classroomplus.controller.CampusMapController"
+      spacing="16" style="-fx-padding: 24 28 24 28;">
+
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <VBox spacing="2">
+            <Label text="University campus map" styleClass="h2"/>
+            <Label text="Drag the map to move it. Hold Ctrl and scroll, or use the buttons, to zoom."
+                   styleClass="muted"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="-" styleClass="secondary-button" onAction="#onZoomOut"/>
+        <Label fx:id="zoomLabel" styleClass="section-title" minWidth="52" alignment="CENTER"/>
+        <Button text="+" styleClass="secondary-button" onAction="#onZoomIn"/>
+        <Button text="Fit to window" styleClass="secondary-button" onAction="#onFit"/>
+    </HBox>
+
+    <StackPane styleClass="card" VBox.vgrow="ALWAYS">
+        <ScrollPane fx:id="mapScroll" pannable="true" fitToWidth="true" fitToHeight="true"
+                    hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" styleClass="week-scroll">
+            <content>
+                <StackPane fx:id="mapHolder">
+                    <ImageView fx:id="mapView" preserveRatio="true" smooth="true"/>
+                </StackPane>
+            </content>
+        </ScrollPane>
+        <Label fx:id="emptyLabel" styleClass="muted" wrapText="true" visible="false" managed="false"/>
+    </StackPane>
+</VBox>

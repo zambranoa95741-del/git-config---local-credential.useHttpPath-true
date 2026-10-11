@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.classroomplus.controller.ReserveController"
+      spacing="16" style="-fx-padding: 24 28 24 28;">
+
+    <VBox styleClass="card" spacing="12">
+        <Label text="Find a room" styleClass="section-title"/>
+        <HBox spacing="14" alignment="BOTTOM_LEFT">
+            <VBox spacing="6">
+                <Label text="Date" styleClass="field-label"/>
+                <DatePicker fx:id="datePicker" prefWidth="190"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="From" styleClass="field-label"/>
+                <ComboBox fx:id="startBox" prefWidth="130"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="To" styleClass="field-label"/>
+                <ComboBox fx:id="endBox" prefWidth="130"/>
+            </VBox>
+            <VBox spacing="6">
+                <Label text="Seats needed" styleClass="field-label"/>
+                <Spinner fx:id="seatsSpinner" prefWidth="110"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Use current time" styleClass="secondary-button" onAction="#onUseCurrentTime"/>
+        </HBox>
+        <Label fx:id="hintLabel" wrapText="true" maxWidth="Infinity" visible="false" managed="false"/>
+    </VBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <VBox styleClass="card" spacing="10" prefWidth="430" minWidth="380" maxWidth="480">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Rooms" styleClass="section-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="summaryLabel" styleClass="muted"/>
+            </HBox>
+            <ListView fx:id="roomList" styleClass="room-list" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
+        <StackPane HBox.hgrow="ALWAYS">
+            <VBox fx:id="emptyDetail" styleClass="card" alignment="CENTER"
+                  maxWidth="Infinity" maxHeight="Infinity">
+                <Label text="Select a room to see its day and reserve it." styleClass="muted"/>
+            </VBox>
+
+            <VBox fx:id="detailCard" styleClass="card" spacing="12" visible="false" managed="false"
+                  maxWidth="Infinity" maxHeight="Infinity">
+                <Label fx:id="detailTitle" styleClass="h2"/>
+                <Label fx:id="detailInfo" styleClass="muted" wrapText="true"/>
+                <Label fx:id="detailBanner" wrapText="true" maxWidth="Infinity"/>
+
+                <Label text="Schedule for the day" styleClass="field-label"/>
+                <Pane fx:id="timeline" minHeight="78" prefHeight="78" maxHeight="78"/>
+                <HBox spacing="18" alignment="CENTER_LEFT">
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Region styleClass="legend-dot, legend-class"/>
+                        <Label text="Regular class" styleClass="muted"/>
+                    </HBox>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Region styleClass="legend-dot, legend-reservation"/>
+                        <Label text="Reservation" styleClass="muted"/>
+                    </HBox>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Region styleClass="legend-dot, legend-selection"/>
+                        <Label text="Your selection" styleClass="muted"/>
+                    </HBox>
+                </HBox>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <Label text="Purpose" styleClass="field-label"/>
+                <TextField fx:id="purposeField" promptText="e.g. Make-up class, meeting, rehearsal"/>
+                <Button fx:id="reserveButton" text="Reserve this room" styleClass="primary-button"
+                        maxWidth="Infinity" disable="true" onAction="#onReserve"/>
+            </VBox>
+        </StackPane>
+    </HBox>
+</VBox>

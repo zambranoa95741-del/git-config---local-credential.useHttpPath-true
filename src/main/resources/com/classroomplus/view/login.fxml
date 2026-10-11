@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.classroomplus.controller.LoginController"
+      styleClass="root-pane">
+
+    <VBox styleClass="brand-panel" alignment="CENTER" spacing="14" prefWidth="520" HBox.hgrow="ALWAYS">
+        <ImageView fitHeight="120" preserveRatio="true">
+            <image>
+                <Image url="@../images/logo-icon.png"/>
+            </image>
+        </ImageView>
+        <Label text="ClassRoom+" styleClass="brand-title"/>
+        <Region styleClass="gold-rule" minHeight="3" prefHeight="3" prefWidth="64" maxWidth="64"/>
+        <Label text="Classroom reservation and facility management"
+               styleClass="brand-subtitle" wrapText="true"/>
+        <Hyperlink text="Liceo de Cagayan University" styleClass="brand-link" onAction="#onOpenWebsite"/>
+    </VBox>
+
+    <VBox styleClass="form-panel" alignment="CENTER" prefWidth="580" HBox.hgrow="ALWAYS">
+        <VBox spacing="12" maxWidth="340" alignment="CENTER_LEFT">
+            <ImageView fitHeight="88" preserveRatio="true">
+                <image>
+                    <Image url="@../images/logo.png"/>
+                </image>
+            </ImageView>
+
+            <Label text="Welcome back" styleClass="h1"/>
+            <Label text="Sign in to reserve and manage classrooms." styleClass="muted"/>
+
+            <Label text="Username" styleClass="field-label"/>
+            <TextField fx:id="usernameField" promptText="Enter your username"/>
+
+            <Label text="Password" styleClass="field-label"/>
+            <PasswordField fx:id="passwordField" promptText="Enter your password"/>
+
+            <Label fx:id="errorLabel" styleClass="error-label" visible="false" managed="false"/>
+
+            <Button text="Sign in" styleClass="primary-button" maxWidth="Infinity"
+                    defaultButton="true" onAction="#onLogin"/>
+
+            <HBox alignment="CENTER" spacing="4">
+                <Label text="New here?" styleClass="muted"/>
+                <Hyperlink text="Create an account" onAction="#onRegister"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</HBox>

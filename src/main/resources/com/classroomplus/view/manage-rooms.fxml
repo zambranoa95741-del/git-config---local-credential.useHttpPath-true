@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.classroomplus.controller.ManageRoomsController"
+      spacing="16" style="-fx-padding: 24 28 24 28;">
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="Search by room, building, or facility" prefWidth="340"/>
+        <Label fx:id="countLabel" styleClass="muted"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Add room" styleClass="primary-button" onAction="#onAdd"/>
+        <Button fx:id="editButton" text="Edit" styleClass="secondary-button"
+                disable="true" onAction="#onEdit"/>
+        <Button fx:id="deleteButton" text="Delete" styleClass="danger-button"
+                disable="true" onAction="#onDelete"/>
+    </HBox>
+
+    <TableView fx:id="table" VBox.vgrow="ALWAYS">
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+        <columns>
+            <TableColumn fx:id="roomCol" text="Room" minWidth="80"/>
+            <TableColumn fx:id="buildingCol" text="Building" minWidth="140"/>
+            <TableColumn fx:id="capacityCol" text="Capacity" minWidth="90"/>
+            <TableColumn fx:id="facilitiesCol" text="Facilities" minWidth="200"/>
+            <TableColumn fx:id="classesCol" text="Weekly classes" minWidth="120"/>
+        </columns>
+        <placeholder>
+            <Label text="No rooms to show. Click Add room to create one." styleClass="muted"/>
+        </placeholder>
+    </TableView>
+</VBox>

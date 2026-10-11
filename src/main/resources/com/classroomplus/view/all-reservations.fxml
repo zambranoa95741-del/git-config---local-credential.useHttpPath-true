@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.classroomplus.controller.AllReservationsController"
+      spacing="16" style="-fx-padding: 24 28 24 28;">
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="Search by teacher, room, or purpose" prefWidth="320"/>
+        <ComboBox fx:id="statusFilter" prefWidth="180"/>
+        <Label fx:id="countLabel" styleClass="muted"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="cancelButton" text="Cancel reservation" styleClass="danger-button"
+                disable="true" onAction="#onCancel"/>
+    </HBox>
+
+    <TableView fx:id="table" VBox.vgrow="ALWAYS">
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+        <columns>
+            <TableColumn fx:id="teacherCol" text="Teacher" minWidth="150"/>
+            <TableColumn fx:id="roomCol" text="Room" minWidth="130"/>
+            <TableColumn fx:id="dateCol" text="Date" minWidth="130"/>
+            <TableColumn fx:id="timeCol" text="Time" minWidth="140"/>
+            <TableColumn fx:id="purposeCol" text="Purpose" minWidth="160"/>
+            <TableColumn fx:id="statusCol" text="Status" minWidth="100"/>
+        </columns>
+        <placeholder>
+            <Label text="No reservations to show." styleClass="muted"/>
+        </placeholder>
+    </TableView>
+</VBox>

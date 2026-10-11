@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.classroomplus.controller.MainController">
+
+    <left>
+        <VBox styleClass="sidebar" prefWidth="250" minWidth="250" spacing="4">
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 0 0 18 6;">
+                <ImageView fitHeight="36" fitWidth="36" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logo-icon.png"/>
+                    </image>
+                </ImageView>
+                <Label text="ClassRoom+" styleClass="sidebar-brand" style="-fx-padding: 0;"/>
+            </HBox>
+
+            <Button fx:id="dashboardButton" text="Dashboard" styleClass="nav-button"
+                    maxWidth="Infinity" onAction="#showDashboard">
+                <graphic>
+                    <SVGPath styleClass="nav-icon" content="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z M9 22V12h6v10"/>
+                </graphic>
+            </Button>
+            <Button fx:id="classroomsButton" text="Classrooms" styleClass="nav-button"
+                    maxWidth="Infinity" onAction="#showClassrooms">
+                <graphic>
+                    <SVGPath styleClass="nav-icon" content="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z M3 9h18 M9 21V9"/>
+                </graphic>
+            </Button>
+            <Button fx:id="reserveButton" text="Reserve a Room" styleClass="nav-button"
+                    maxWidth="Infinity" onAction="#showReserve">
+                <graphic>
+                    <SVGPath styleClass="nav-icon" content="M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20z M12 8v8 M8 12h8"/>
+                </graphic>
+            </Button>
+            <Button fx:id="myReservationsButton" text="My Reservations" styleClass="nav-button"
+                    maxWidth="Infinity" onAction="#showMyReservations">
+                <graphic>
+                    <SVGPath styleClass="nav-icon" content="M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z M16 2v4 M8 2v4 M3 10h18"/>
+                </graphic>
+            </Button>
+            <Button fx:id="findRoomButton" text="Find a Room" styleClass="nav-button"
+                    maxWidth="Infinity" onAction="#showFindRoom">
+                <graphic>
+                    <SVGPath styleClass="nav-icon" content="M11 3a8 8 0 1 0 0 16a8 8 0 1 0 0-16z M21 21l-4.35-4.35"/>
+                </graphic>
+            </Button>
+            <Button fx:id="campusMapButton" text="Campus Map" styleClass="nav-button"
+                    maxWidth="Infinity" onAction="#showCampusMap">
+                <graphic>
+                    <SVGPath styleClass="nav-icon" content="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z M8 2v16 M16 6v16"/>
+                </graphic>
+            </Button>
+
+            <VBox fx:id="adminSection" spacing="4">
+                <Label text="ADMINISTRATION" styleClass="sidebar-section"/>
+                <Button fx:id="allReservationsButton" text="All Reservations" styleClass="nav-button"
+                        maxWidth="Infinity" onAction="#showAllReservations">
+                    <graphic>
+                        <SVGPath styleClass="nav-icon" content="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2 M9 3a4 4 0 1 0 0 8a4 4 0 1 0 0-8z M23 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="manageRoomsButton" text="Manage Rooms" styleClass="nav-button"
+                        maxWidth="Infinity" onAction="#showManageRooms">
+                    <graphic>
+                        <SVGPath styleClass="nav-icon" content="M4 21v-7 M4 10V3 M12 21v-9 M12 8V3 M20 21v-5 M20 12V3 M1 14h6 M9 8h6 M17 16h6"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="manageSchedulesButton" text="Manage Schedules" styleClass="nav-button"
+                        maxWidth="Infinity" onAction="#showManageSchedules">
+                    <graphic>
+                        <SVGPath styleClass="nav-icon" content="M12 2a10 10 0 1 0 0 20a10 10 0 1 0 0-20z M12 6v6l4 2"/>
+                    </graphic>
+                </Button>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <VBox styleClass="user-card" spacing="2">
+                <Label fx:id="userNameLabel" styleClass="user-name"/>
+                <Label fx:id="userRoleLabel" styleClass="user-role"/>
+            </VBox>
+            <Button text="Log out" styleClass="nav-button" maxWidth="Infinity" onAction="#onLogout">
+                <graphic>
+                    <SVGPath styleClass="nav-icon" content="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9"/>
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+    <top>
+        <HBox styleClass="header-bar" alignment="CENTER_LEFT">
+            <Label fx:id="pageTitleLabel" styleClass="page-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="dateLabel" styleClass="muted"/>
+        </HBox>
+    </top>
+
+    <center>
+        <StackPane fx:id="contentArea"/>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" alignment="CENTER_LEFT">
+            <Label fx:id="statusLabel" styleClass="status-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>

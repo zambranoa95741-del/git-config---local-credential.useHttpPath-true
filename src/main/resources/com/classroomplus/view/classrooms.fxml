@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.classroomplus.controller.ClassroomsController"
+      spacing="16" style="-fx-padding: 24 28 24 28;">
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="Search by room, building, facility, or class name" prefWidth="320"/>
+        <ComboBox fx:id="buildingFilter" prefWidth="190"/>
+        <CheckBox fx:id="availableOnly" text="Available now only"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="countLabel" styleClass="muted"/>
+    </HBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <VBox styleClass="card" prefWidth="380" minWidth="340" maxWidth="420">
+            <ListView fx:id="roomList" styleClass="room-list" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
+        <StackPane HBox.hgrow="ALWAYS">
+            <VBox fx:id="emptyDetail" styleClass="card" alignment="CENTER"
+                  maxWidth="Infinity" maxHeight="Infinity">
+                <Label text="Select a room to see its weekly timetable." styleClass="muted"/>
+            </VBox>
+
+            <VBox fx:id="detailCard" styleClass="card" spacing="12" visible="false" managed="false"
+                  maxWidth="Infinity" maxHeight="Infinity">
+
+                <HBox alignment="CENTER_LEFT" spacing="12">
+                    <VBox spacing="2" HBox.hgrow="ALWAYS">
+                        <Label fx:id="detailTitle" styleClass="h2"/>
+                        <Label fx:id="detailInfo" styleClass="muted"/>
+                    </VBox>
+                    <Label fx:id="detailBadge"/>
+                </HBox>
+
+                <FlowPane fx:id="detailChips" hgap="6" vgap="6"/>
+
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Button text="Previous week" styleClass="secondary-button" onAction="#onPrevWeek"/>
+                    <Label fx:id="weekLabel" styleClass="section-title" style="-fx-padding: 0 6 0 6;"/>
+                    <Button text="Next week" styleClass="secondary-button" onAction="#onNextWeek"/>
+                    <Button text="This week" styleClass="secondary-button" onAction="#onThisWeek"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Region styleClass="legend-dot, legend-class"/>
+                        <Label text="Regular class" styleClass="muted"/>
+                    </HBox>
+                    <HBox spacing="6" alignment="CENTER_LEFT" style="-fx-padding: 0 0 0 10;">
+                        <Region styleClass="legend-dot, legend-reservation"/>
+                        <Label text="Reservation" styleClass="muted"/>
+                    </HBox>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER"
+                            styleClass="week-scroll" VBox.vgrow="ALWAYS">
+                    <content>
+                        <Pane fx:id="weekGrid" minHeight="430"/>
+                    </content>
+                </ScrollPane>
+            </VBox>
+        </StackPane>
+    </HBox>
+</VBox>
